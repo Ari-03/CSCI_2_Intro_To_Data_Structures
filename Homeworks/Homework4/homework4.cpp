@@ -1,0 +1,90 @@
+/*
+    Programmer : Aritra Das
+    File Name  : lab4.cpp
+    Date       : 9-18-2020
+    Version    : 1.2
+    Description
+    It will take day of the year and return in the form of [Month] [Day]
+*/
+
+#include <iostream>
+using namespace std;
+
+class DayOfYear
+{
+private:
+    int dayOfYear;  
+public:
+    DayOfYear(int day)
+    {
+        dayOfYear = day;
+    }
+    void printDayAsYear()
+    {
+        if(dayOfYear <= 31)
+        {
+            cout << "January " << dayOfYear << endl;
+        }
+        else if(dayOfYear <= 59)
+        {
+            cout << "February " << dayOfYear - 31 << endl;
+        }
+        else if(dayOfYear <= 90)
+        {
+            cout << "March " << dayOfYear - 59 << endl;
+        }
+        else if(dayOfYear <= 120)
+        {
+            cout << "April " << dayOfYear - 90 << endl;
+        }
+        else if(dayOfYear <= 151)
+        {
+            cout << "May " << dayOfYear - 120 << endl;
+        }  
+        else if(dayOfYear <= 181)
+        {
+            cout << "June " << dayOfYear - 151 << endl;
+        }   
+        else if(dayOfYear <= 212)
+        {
+            cout << "July " << dayOfYear - 181 << endl;
+        }  
+        else if(dayOfYear <= 243)
+        {
+            cout << "August " << dayOfYear - 212 << endl;
+        }  
+        else if(dayOfYear <= 273)
+        {
+            cout << "September " << dayOfYear - 243 << endl;
+        }  
+        else if(dayOfYear <= 304)
+        {
+            cout << "October " << dayOfYear - 273 << endl;
+        }  
+        else if(dayOfYear <= 334)
+        {
+            cout << "November " << dayOfYear - 304 << endl;
+        }  
+        else if(dayOfYear <= 365)
+        {
+            cout << "December " << dayOfYear - 334 << endl;
+        }  
+    }
+};
+int main()
+{
+    int day;
+    cout << "Enter a day of the year : ";
+    cin >> day;
+    if(day < 1 || day > 365 )
+    {
+        do
+        {
+            cout << "Please input a number that is between 1-365 : ";
+            cin >> day;
+        }
+        while(day < 1 || day > 365);
+    }
+    DayOfYear d(day);
+    d.printDayAsYear();
+}
