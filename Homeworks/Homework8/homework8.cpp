@@ -4,7 +4,7 @@
     Date       : 10-17-2020
     Version    : 1.2
     Description:
-    Using the Linked List Data Structure create the insert function to the linked List.
+    Using the Linked List Data Structure and adding a few values to the structure and displaying it.
 */
 #include <iostream>
 using namespace std;
@@ -93,6 +93,27 @@ public:
         }
     }
 
+    //Function maked to reverse a Linked List
+    void reverse()
+    {
+        Node *next = head->next;//The next nPtr so we can traverse the list after we change the next for the current node
+        Node *curr = head;//The current nPtr so we can change the node's next to the previous node
+        Node *pre = NULL;//The previous nPtr to we can set the current's next to this node
+        if(head != NULL)//Reverse only works if the Linked List is not exmpty
+        {
+            while (next != NULL)//While the next nPtr is not Null
+            {
+                curr->next = pre;//We set the current's next to the previous node
+                //Traverse the Linked List
+                pre = curr;
+                curr = next;
+                next = next->next;
+            }
+            curr->next = pre;//Connect the currrent's next to the previous node
+            head = curr;//We set the head nPtr to the current
+        }        
+    }
+
     //Function that displays all the nodes fromm the List
     void dispaly()
     {
@@ -135,5 +156,7 @@ int main()
     l->insert(54);
     l->insert(63);
     //Displaying the Nodes  
+    l->dispaly();
+    l->reverse();
     l->dispaly();
 }
