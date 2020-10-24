@@ -46,10 +46,13 @@ Stack<T>::Stack(const Stack&  Stk)
 	{
 		stackArray = NULL;
 	}
+	//Copying all of the stackArray
 	for (size_t i = 0; i < stk.size; i++)
 	{
 		stackArray[i] = Stk.stackArray[i];
 	}
+	//Set top of stack
+	top = Stk.top;
 }
 
 template <class T>
