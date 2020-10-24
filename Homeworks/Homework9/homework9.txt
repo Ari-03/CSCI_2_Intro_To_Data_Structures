@@ -1,0 +1,150 @@
+/*
+    Programmer : Aritra Das
+    File Name  : stack.h
+    Date       : 10-23-2020
+    Version    : 1
+    Description:
+    Stack Header
+*/
+#include <iostream>
+using namespace std;
+
+template <class T>
+class Stack
+{
+private:
+	T *stackArray;
+	int size;//Size Of Stack
+	int top;// Top of stack or array index
+public:
+	Stack(int sz); // Constructor takes size of array
+	Stack(const Stack&);//Copy Constructor
+	~Stack();//Destructor
+	void display(); //Display stack
+	void push(T);//Inserts element into stack
+	T pop();//Removes element from the stack
+	bool isFull() const;//Checks if the stack is full
+	bool isEmpty() const;//Checks if the stack is empty
+};
+
+template <class T>
+Stack<T>::Stack(int sz)
+{
+	stackArray = new T[sz];
+	size = sz;
+	top = -1;
+}//end of constuctor
+
+template <class T>
+void Stack<T>::push(T num)
+{
+	if(isFull())
+	{
+		cout << "The Stack is Full.\n";
+	}
+	else
+	{
+		top++;
+		stackArray[top] = num;
+	}
+}//end push
+
+template <class T>
+T Stack<T>::pop()
+{
+	if(isEmpty())
+	{
+		cout << "The Stack is Empty.\n";
+	}
+	else
+	{
+		//cout << stackArray[top] << endl;
+		return stackArray[top--];
+	}
+}//End pop
+
+template <class T>
+void Stack<T>::display()
+{
+	int t = top;
+	cout << "[";
+	while( t >= 0)
+	{
+		cout  << stackArray[t] << "|";
+		t--;
+	}
+	cout << "End]\n";
+}//End Display
+
+template <class T>
+Stack<T>::~Stack()
+{
+	delete [] stackArray;
+}//End Destructor
+
+template <class T>
+bool Stack<T>::isFull() const
+{
+	if(top == size-1)
+		return true;
+	return false;
+}
+
+template <class T>
+bool Stack<T>::isEmpty() const
+{
+	if(top == -1)
+		return true;
+	return false;
+}
+//End Stack.h
+
+/*
+    Programmer : Aritra Das
+    File Name  : homework9.cpp
+    Date       : 10-23-2020
+    Version    : 1
+    Description:
+    Balancing parentheses from a given input string
+*/
+#include "Stack.h"//includes the Stack header with the Stack Data Type
+
+#include <iostream>
+using namespace std;
+
+bool parenthesesCheck(string input)
+{
+    Stack<char> *ptr = new Stack<char>(25);//Creates Stack with a size of 25 as that seems like the max amount of '(' in a typical input
+    for (size_t i = 0; i < input.size(); i++)//Iterates over the entire string input
+    {
+        if(input[i] == '(')//If the char is '(' we add to the stack
+            ptr->push(input[i]);
+        if(input[i] == ')')//If the char is ')'
+        {
+            if(ptr->isEmpty())//See if the stack is empty to see if there is a open parenthesis '(' infront of the ')' If one does not exist then the parentheses is not balanced
+            {
+                return false;
+            }
+            ptr->pop();//Remove one '(' form the stack
+        }
+    }
+    return (ptr->isEmpty());//If nothing remains in the stack and the function has not terminated before reaching here then the parenthesis is balanced.
+}
+
+int main()
+{
+    cout << "Enter the string that you want to balance parentheses :" << endl;
+    string input;
+    getline(cin,input);//Gets the input
+    
+    //if the function returns true the parentheses are balanced else not balanced.
+    if(parenthesesCheck(input))
+    {
+        cout << "The Parentheses are Balanced.\n";
+    }
+    else
+    {
+        cout << "The parentheses are Not Balanced.\n";
+    }
+    
+}
